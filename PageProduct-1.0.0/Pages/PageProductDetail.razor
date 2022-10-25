@@ -1,0 +1,25 @@
+@page "/products/{id:int}/details"
+@using PageProducts.Data;
+
+<h1><b>Detalle del producto:</b></h1> 
+<br><h2>@Producto.Id @Producto.Codes @Producto.Names  @Producto.Price</h2>
+
+
+@code {
+    [Parameter]
+    public int Id { get; set;}
+
+    private Product Producto;
+    
+
+
+    protected override void OnInitialized()
+    {
+        InMemoryProducts productoBD = new InMemoryProducts();
+        List<Product> productos = productoBD.getProducts();
+
+        Producto = productos[this.Id-1];
+
+    }
+}
+

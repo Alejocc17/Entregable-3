@@ -1,0 +1,33 @@
+@page "/products"
+@using PageProducts.Data;
+
+<PageTitle>Productos</PageTitle>
+
+<h1>Productos</h1>
+
+        @foreach (var producto in productos)
+        {
+            <tr>
+                <td>@producto.Id</td>
+                <td>@producto.Names</td>
+                <td>
+                    -
+                    <a class="btn btn-info" href="/products/@producto.Id/details">
+                        Ver Detalle
+                    </a>
+                </td>
+            </tr>
+        }
+    
+
+@code {
+    
+    public List<Product> productos = new();
+
+        
+    protected override void OnInitialized()
+    {
+        InMemoryProducts productoBD = new InMemoryProducts();
+        productos = productoBD.getProducts();
+    }
+}
